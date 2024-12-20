@@ -1,0 +1,353 @@
+
+test/TestHelper.h,69
+#define KALMAN_TEST_HELPER_H_2,30
+#define ASSERT_MATRIX_NEAR(9,164
+
+examples/Robot1/OrientationMeasurementModel.hpp,360
+#define KALMAN_EXAMPLES_ROBOT1_ORIENTATIONMEASUREMENTMODEL_HPP_2,64
+namespace KalmanExamples6,179
+namespace Robot18,206
+class OrientationMeasurement 17,370
+    T theta(25,556
+    T& theta(26,606
+template<typename T,40,1149
+    typedef KalmanExamples::Robot1::State<T> S;45,1411
+    typedef  KalmanExamples::Robot1::OrientationMeasurement<T> M;48,1509
+
+examples/Robot1/PositionMeasurementModel.hpp,381
+#define KALMAN_EXAMPLES_ROBOT1_POSITIONMEASUREMENTMODEL_HPP_2,61
+namespace KalmanExamples6,173
+namespace Robot18,200
+class PositionMeasurement 17,342
+    T d1(28,602
+    T d2(29,651
+    T& d1(31,705
+    T& d2(32,748
+template<typename T,49,1463
+    typedef  KalmanExamples::Robot1::State<T> S;54,1719
+    typedef  KalmanExamples::Robot1::PositionMeasurement<T> M;57,1818
+
+examples/Robot1/SystemModel.hpp,521
+#define KALMAN_EXAMPLES1_ROBOT_SYSTEMMODEL_HPP_2,48
+namespace KalmanExamples6,142
+namespace Robot18,169
+class State 20,444
+    T x(32,704
+    T y(33,751
+    T theta(34,798
+    T& x(36,854
+    T& y(37,895
+    T& theta(38,936
+class Control 51,1282
+    static constexpr size_t DTHETA 59,1468
+    T v(61,1513
+    T dtheta(62,1560
+    T& v(64,1617
+    T& dtheta(65,1658
+template<typename T,79,2179
+	typedef KalmanExamples::Robot1::State<T> S;84,2405
+    typedef KalmanExamples::Robot1::Control<T> C;87,2496
+
+examples/Robot1/main.cpp,484
+#define _USE_MATH_DEFINES4,196
+typedef float T;22,531
+typedef Robot1::State<T> State;25,572
+typedef Robot1::Control<T> Control;26,604
+typedef Robot1::SystemModel<T> SystemModel;27,640
+typedef Robot1::PositionMeasurement<T> PositionMeasurement;29,685
+typedef Robot1::OrientationMeasurement<T> OrientationMeasurement;30,745
+typedef Robot1::PositionMeasurementModel<T> PositionModel;31,811
+typedef Robot1::OrientationMeasurementModel<T> OrientationModel;32,870
+int main(34,936
+
+include/kalman/ExtendedKalmanFilter.hpp,742
+#define KALMAN_EXTENDEDKALMANFILTER_HPP_23,1178
+namespace Kalman 30,1366
+    class ExtendedKalmanFilter 41,1778
+        typedef KalmanFilterBase<StateType> KalmanBase;46,1971
+        typedef StandardFilterBase<StateType> StandardBase;48,2065
+        using typename KalmanBase::T;51,2186
+        using typename KalmanBase::State;54,2276
+        using MeasurementModelType = LinearizedMeasurementModel<State, Measurement,58,2447
+        using SystemModelType = LinearizedSystemModel<State, Control,62,2668
+        using KalmanBase::x;71,2969
+        using StandardBase::P;73,3034
+        ExtendedKalmanFilter(79,3140
+        const State& predict(92,3574
+        const State& predict(108,4161
+        const State& update(130,4981
+
+include/kalman/KalmanFilterBase.hpp,326
+#define KALMAN_KALMANFILTERBASE_HPP_23,1174
+namespace Kalman 28,1256
+    class KalmanFilterBase36,1499
+        typedef typename StateType::Scalar T;44,1866
+        typedef StateType State;47,1958
+        State x;51,2043
+        const State& getState(57,2143
+        void init(66,2354
+        KalmanFilterBase(74,2528
+
+include/kalman/LinearizedMeasurementModel.hpp,271
+#define KALMAN_LINEARIZEDMEASUREMENTMODEL_HPP_23,1184
+namespace Kalman 27,1265
+    class LinearizedMeasurementModel : public MeasurementModel<StateType, MeasurementType,41,1999
+        typedef MeasurementModel<StateType, MeasurementType, CovarianceBase> Base;47,2277
+
+include/kalman/LinearizedSystemModel.hpp,243
+#define KALMAN_LINEARIZEDSYSTEMMODEL_HPP_23,1179
+namespace Kalman 27,1250
+    class LinearizedSystemModel : public SystemModel<StateType, ControlType,41,2014
+        typedef SystemModel<StateType, ControlType, CovarianceBase> Base;47,2273
+
+include/kalman/Matrix.hpp,831
+#define KALMAN_MATRIX_HPP_23,1164
+#define KALMAN_VECTOR(29,1234
+namespace Kalman 48,2771
+    const int Dynamic 49,2790
+    template<typename T,58,3036
+    template<typename T, int rows,58,3036
+    using Matrix 59,3081
+    using Matrix = Eigen::Matrix<T, rows,59,3081
+    template<typename T,66,3268
+    class Vector 67,3300
+        typedef Matrix<T,T71,3389
+        typedef Matrix<T, N,71,3389
+        typedef Matrix<T, N, 1> Base;71,3389
+        using typename Base::Scalar;73,3428
+        using Base::RowsAtCompileTime;74,3465
+        using Base::ColsAtCompileTime;75,3504
+        using Base::SizeAtCompileTime;76,3543
+        Vector(78,3583
+        Vector(84,3735
+        Vector& operator= operator=91,3955
+    template<typename _MatrixType,103,4344
+    template<typename _MatrixType, int _UpLo 103,4344
+
+include/kalman/MeasurementModel.hpp,165
+#define KALMAN_MEASUREMENTMODEL_HPP_23,1174
+namespace Kalman 29,1265
+        typedef StateType State;48,2523
+        typedef MeasurementType Measurement;51,2601
+
+include/kalman/SquareRootBase.hpp,400
+#define KALMAN_SQUAREROOTBASE_HPP_23,1172
+namespace Kalman 27,1230
+    class SquareRootBase35,1485
+        CovarianceSquareRoot<StateType> S;39,1566
+        const CovarianceSquareRoot<StateType>& getCovarianceSquareRoot(45,1697
+        Covariance<StateType> getCovariance(53,1908
+        bool setCovariance(61,2083
+        bool setCovarianceSquareRoot(73,2487
+        SquareRootBase(80,2672
+
+include/kalman/SquareRootExtendedKalmanFilter.hpp,926
+#define KALMAN_SQUAREROOTEXTENDEDKALMANFILTER_HPP_23,1188
+namespace Kalman 30,1388
+    class SquareRootExtendedKalmanFilter 41,1815
+        typedef KalmanFilterBase<StateType> KalmanBase;46,2030
+        typedef SquareRootFilterBase<StateType> SquareRootBase;48,2126
+        using typename KalmanBase::T;51,2251
+        using typename KalmanBase::State;54,2341
+        using MeasurementModelType = LinearizedMeasurementModel<State, Measurement,58,2512
+        using SystemModelType = LinearizedSystemModel<State, Control,62,2733
+        using KalmanBase::x;71,3034
+        using SquareRootBase::S;73,3104
+        SquareRootExtendedKalmanFilter(79,3212
+        const State& predict(92,3646
+        const State& predict(108,4233
+        const State& update(130,5059
+        bool computePredictedCovarianceSquareRoot(209,9081
+        bool computeKalmanGain(252,11349
+        bool updateStateCovariance(269,12041
+
+include/kalman/SquareRootFilterBase.hpp,202
+#define KALMAN_SQUAREROOTFILTERBASE_HPP_23,1178
+namespace Kalman 27,1251
+    class SquareRootFilterBase 35,1495
+        typedef SquareRootBase<StateType> Base;39,1615
+        using Base::S;42,1707
+
+include/kalman/SquareRootUnscentedKalmanFilter.hpp,938
+#define KALMAN_SQUAREROOTUNSCENTEDKALMANFILTER_HPP_23,1189
+namespace Kalman 28,1320
+    class SquareRootUnscentedKalmanFilter 41,1956
+        typedef UnscentedKalmanFilterBase<StateType> UnscentedBase;46,2192
+        typedef SquareRootFilterBase<StateType> SquareRootBase;49,2310
+        using typename UnscentedBase::T;52,2435
+        using typename UnscentedBase::State;55,2528
+        using UnscentedBase::SigmaPointCount;67,3119
+        using UnscentedBase::x;81,3592
+        using SquareRootBase::S;84,3677
+        using UnscentedBase::sigmaStatePoints;87,3752
+        SquareRootUnscentedKalmanFilter(99,4242
+        const State& predict(113,4803
+        const State& predict(129,5396
+        const State& update(156,6455
+        bool computeSigmaPoints(193,7898
+        bool computeCovarianceSquareRootFromSigmaPoints(223,9387
+        bool computeKalmanGain(272,12303
+        bool updateStateCovariance(298,13759
+
+include/kalman/StandardBase.hpp,384
+#define KALMAN_STANDARDBASE_HPP_23,1170
+namespace Kalman 27,1226
+    class StandardBase35,1496
+        Covariance<StateType> P;39,1563
+        const Covariance<StateType>& getCovariance(45,1667
+        CovarianceSquareRoot<StateType> getCovarianceSquareRoot(53,1844
+        bool setCovariance(61,2050
+        bool setCovarianceSquareRoot(73,2423
+        StandardBase(83,2697
+
+include/kalman/StandardFilterBase.hpp,196
+#define KALMAN_STANDARDFILTERBASE_HPP_23,1176
+namespace Kalman 27,1245
+    class StandardFilterBase 35,1504
+        typedef StandardBase<StateType> Base;39,1618
+        using Base::P;42,1703
+
+include/kalman/SystemModel.hpp,152
+#define KALMAN_SYSTEMMODEL_HPP_23,1169
+namespace Kalman 30,1277
+        typedef StateType State;49,2536
+        typedef ControlType Control;52,2616
+
+include/kalman/Types.hpp,420
+#define KALMAN_TYPES_HPP_23,1163
+namespace Kalman27,1213
+    template<typename T,35,1429
+    using SquareMatrix 36,1461
+    using SquareMatrix = Matrix<T, N,36,1461
+    using Covariance 44,1742
+    using CovarianceSquareRoot 52,2080
+    using KalmanGain 61,2374
+                              State::RowsAtCompileTime,62,2428
+    using Jacobian 70,2684
+                            A::RowsAtCompileTime,71,2732
+
+include/kalman/UnscentedKalmanFilter.hpp,892
+#define KALMAN_UNSCENTEDKALMANFILTER_HPP_23,1179
+namespace Kalman 28,1298
+    class UnscentedKalmanFilter 41,1949
+        typedef UnscentedKalmanFilterBase<StateType> UnscentedBase;46,2163
+        typedef StandardFilterBase<StateType> StandardBase;49,2278
+        using typename UnscentedBase::T;52,2399
+        using typename UnscentedBase::State;55,2492
+        using UnscentedBase::SigmaPointCount;67,3083
+        using UnscentedBase::x;81,3556
+        using StandardBase::P;84,3626
+        using UnscentedBase::sigmaStatePoints;87,3699
+        UnscentedKalmanFilter(99,4189
+        const State& predict(113,4740
+        const State& predict(129,5333
+        const State& update(156,6372
+        bool computeSigmaPoints(185,7553
+        bool computeCovarianceFromSigmaPoints(220,9046
+        bool computeKalmanGain(241,10124
+        bool updateStateCovariance(267,11535
+
+include/kalman/UnscentedKalmanFilterBase.hpp,1236
+#define KALMAN_UNSCENTEDKALMANFILTERBASE_HPP_23,1183
+namespace Kalman 31,1342
+    class UnscentedKalmanFilterBase 42,1883
+        typedef KalmanFilterBase<StateType> Base;47,2037
+        using typename Base::T;50,2148
+        using typename Base::State;53,2232
+        using MeasurementModelType = MeasurementModel<State, Measurement,57,2382
+        using SystemModelType = SystemModel<State, Control,61,2582
+        typedef Vector<T,T69,2932
+        typedef Vector<T, SigmaPointCount> SigmaWeights;69,2932
+        using SigmaPoints = Matrix<T, Type::RowsAtCompileTime,73,3100
+        using Base::x;79,3261
+        SigmaWeights sigmaWeights_m;82,3323
+        SigmaWeights sigmaWeights_c;84,3390
+        SigmaPoints<State> sigmaStatePoints;87,3469
+        T alpha;90,3552
+        T beta;91,3664
+        T kappa;92,3786
+        T gamma;93,3851
+        T lambda;94,3958
+        UnscentedKalmanFilterBase(106,4492
+        State computeStatePrediction(123,5098
+        Measurement computeMeasurementPrediction(140,5911
+        void computeWeights(152,6471
+        void computeSigmaPointTransition(190,7891
+        void computeSigmaPointMeasurements(207,8645
+        Type computePredictionFromSigmaPoints(224,9396
+
+test/ExtendedKalmanFilter.cpp,83
+#define private 3,25
+#define protected 4,48
+typedef float T;10,143
+TEST(12,161
+
+test/Matrix.cpp,96
+#define private 3,26
+#define protected 4,49
+typedef float T;10,130
+TEST(12,148
+TEST(40,743
+
+test/SquareRootBase.cpp,161
+#define private 3,25
+#define protected 4,48
+typedef float T;10,137
+typedef Kalman::Vector<T,T11,154
+typedef Kalman::Vector<T, 3> Vec3f;11,154
+TEST(13,191
+
+test/SquareRootUnscentedKalmanFilter.cpp,139
+#define private 3,25
+#define protected 4,48
+typedef float T;10,154
+TEST(12,172
+TEST(21,566
+TEST(48,1420
+TEST(96,2817
+TEST(148,4166
+
+test/StandardBase.cpp,161
+#define private 3,25
+#define protected 4,48
+typedef float T;10,135
+typedef Kalman::Vector<T,T11,152
+typedef Kalman::Vector<T, 3> Vec3f;11,152
+TEST(13,189
+
+test/UnscentedKalmanFilter.cpp,139
+#define private 3,25
+#define protected 4,48
+typedef float T;10,144
+TEST(12,162
+TEST(21,526
+TEST(48,1373
+TEST(85,2291
+TEST(133,3495
+
+test/UnscentedKalmanFilterBase.cpp,286
+#define private 4,57
+#define protected 5,80
+class ConcreteUKF 12,206
+    typedef UnscentedKalmanFilterBase<StateType> Base;15,280
+    using typename Base::T;16,335
+    ConcreteUKF(18,368
+typedef float T;21,444
+TEST(23,462
+TEST(32,685
+TEST(51,1214
+TEST(76,1969
+TEST(100,2782
+
+test/models/Quadratic.hpp,431
+#define KALMAN_TEST_MODELS_QUADRATIC_HPP_2,42
+namespace Kalman7,159
+namespace Test9,178
+namespace Models11,195
+class QuadraticSystemModel 15,241
+    typedef SystemModel<StateType,StateType18,321
+    typedef SystemModel<StateType, StateType> Base;18,321
+    using typename Base::State;19,373
+    using typename Base::Control;20,405
+    State f(22,444
+    typedef MeasurementModel<StateType, MeasurementType> Base;33,734
