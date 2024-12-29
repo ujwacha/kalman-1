@@ -105,7 +105,7 @@ namespace Kalman {
          * @return The updated state estimate
          */
         template<class Control, template<class> class CovarianceBase>
-        const State& predict( SystemModelType<Control, CovarianceBase>& s, const Control& u, const float t = 0.05)
+        const State& predict( SystemModelType<Control, CovarianceBase>& s, const Control& u, const double t = 0.05)
         {
 	  s.updateJacobians( x, u , t);
             
@@ -129,7 +129,7 @@ namespace Kalman {
          * @return The updated state estimate
          */
         template<class Measurement, template<class> class CovarianceBase>
-        const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const float t = 0.05)
+        const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05)
         {
 	  m.updateJacobians( x, t );
             

@@ -61,7 +61,7 @@ namespace Kalman {
         /**
          * Callback function for state-dependent update of Jacobi-matrices H and V before each update step
          */
-      virtual void updateJacobians( const State& x, const float t = 0.05)
+      virtual void updateJacobians( const State& x, const double t = 0.05)
         {
             // No update by default
             (void)x;
