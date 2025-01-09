@@ -131,23 +131,63 @@ namespace Kalman {
     template<class Measurement, template<class> class CovarianceBase>
     const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05)
     {
+
+      std::cout << "KALMAN UPDATING" << std::endl;
+
       m.updateJacobians( x, t );
             
       // COMPUTE KALMAN GAIN
       // compute innovation covariance
-      Covariance<Measurement> S = ( m.H * P * m.H.transpose() ) + ( m.V * m.getCovariance() * m.V.transpose() );
-            
+      Covariance<Measurement> S = ( m.H * P * m.H.transpose() ) + ( m.V * m.getCovariance() * m.V.transpose());
+
+      std::cout << "S = " << std::endl;
+      std::cout << std::endl;
+      std::cout << S << std::endl;
+      std::cout << std::endl;
+
+      std::cout << "P = " << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
+
+      std::cout << "S inverse " << std::endl;
+      std::cout << std::endl;
+      std::cout << S.inverse() << std::endl;
+      std::cout << std::endl;
+
+ 
       // compute kalman gain
       KalmanGain<Measurement> K = P * m.H.transpose() * S.inverse();
+
+      std::cout << "K" << std::endl;
+      std::cout << std::endl;
+      std::cout << K << std::endl;
+      std::cout << std::endl;
+
+
             
       // UPDATE STATE ESTIMATE AND COVARIANCE
       // Update state using computed kalman gain and innovation
       x += K * ( z - m.h( x ) );
+
+      std::cout << "X" << std::endl;
+      std::cout << std::endl;
+      std::cout << x << std::endl;
+      std::cout << std::endl;
+
+
             
       // Update covariance
       P -= K * m.H * P;
 
-      std::cout << std::endl << std::endl << P << std::endl << std::endl;
+
+      std::cout << "P" << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
+
+
+      // std::cout << std::endl << std::endl << P << std::endl << std::endl;
             
       // return updated state estimate
       return this->getState();
