@@ -115,8 +115,6 @@ namespace Kalman {
       // predict covariance
       P  = ( s.F * P * s.F.transpose() ) + ( s.W * s.getCovariance() * s.W.transpose() );
 
-
-
       // return state prediction
       return this->getState();
     }
