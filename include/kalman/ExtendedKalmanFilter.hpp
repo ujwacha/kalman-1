@@ -115,6 +115,13 @@ namespace Kalman {
       // predict covariance
       P  = ( s.F * P * s.F.transpose() ) + ( s.W * s.getCovariance() * s.W.transpose() );
 
+
+      std::cout << "P" << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
+
+
       // return state prediction
       return this->getState();
     }
@@ -138,29 +145,29 @@ namespace Kalman {
       // compute innovation covariance
       Covariance<Measurement> S = ( m.H * P * m.H.transpose() ) + ( m.V * m.getCovariance() * m.V.transpose());
 
-      std::cout << "S = " << std::endl;
-      std::cout << std::endl;
-      std::cout << S << std::endl;
-      std::cout << std::endl;
+      // std::cout << "S = " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << S << std::endl;
+      // std::cout << std::endl;
 
-      std::cout << "P = " << std::endl;
-      std::cout << std::endl;
-      std::cout << P << std::endl;
-      std::cout << std::endl;
+      // std::cout << "P = " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << P << std::endl;
+      // std::cout << std::endl;
 
-      std::cout << "S inverse " << std::endl;
-      std::cout << std::endl;
-      std::cout << S.inverse() << std::endl;
-      std::cout << std::endl;
+      // std::cout << "S inverse " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << S.inverse() << std::endl;
+      // std::cout << std::endl;
 
  
       // compute kalman gain
       KalmanGain<Measurement> K = P * m.H.transpose() * S.inverse();
 
-      std::cout << "K" << std::endl;
-      std::cout << std::endl;
-      std::cout << K << std::endl;
-      std::cout << std::endl;
+      // std::cout << "K" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << K << std::endl;
+      // std::cout << std::endl;
 
 
             
@@ -168,10 +175,10 @@ namespace Kalman {
       // Update state using computed kalman gain and innovation
       x += K * ( z - m.h( x ) );
 
-      std::cout << "X" << std::endl;
-      std::cout << std::endl;
-      std::cout << x << std::endl;
-      std::cout << std::endl;
+      // std::cout << "X" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << x << std::endl;
+      // std::cout << std::endl;
 
 
             
