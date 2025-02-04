@@ -116,10 +116,10 @@ namespace Kalman {
       P  = ( s.F * P * s.F.transpose() ) + ( s.W * s.getCovariance() * s.W.transpose() );
 
 
-      std::cout << "P" << std::endl;
-      std::cout << std::endl;
-      std::cout << P << std::endl;
-      std::cout << std::endl;
+      // std::cout << "P" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << P << std::endl;
+      // std::cout << std::endl;
 
 
       // return state prediction
@@ -137,7 +137,7 @@ namespace Kalman {
     const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05)
     {
 
-      std::cout << "KALMAN UPDATING" << std::endl;
+      // std::cout << "KALMAN UPDATING" << std::endl;
 
       m.updateJacobians( x, t );
             
@@ -186,10 +186,10 @@ namespace Kalman {
       P -= K * m.H * P;
 
 
-      std::cout << "P" << std::endl;
-      std::cout << std::endl;
-      std::cout << P << std::endl;
-      std::cout << std::endl;
+      // std::cout << "P" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << P << std::endl;
+      // std::cout << std::endl;
 
 
       // std::cout << std::endl << std::endl << P << std::endl << std::endl;
