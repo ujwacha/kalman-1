@@ -58,7 +58,7 @@ namespace Kalman {
         {
             return x;
         }
-        
+
         /**
          * @brief Initialize state
          * @param initialState The initial state of the system

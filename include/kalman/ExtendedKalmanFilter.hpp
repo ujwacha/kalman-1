@@ -197,6 +197,16 @@ namespace Kalman {
       // return updated state estimate
       return this->getState();
     }
+
+    // /**
+    //  * Get current state estimate
+    //  */
+    // const StandardBase& getCovariance() const
+    // {
+    //   return P;
+    // }
+
+ 
   };
 }
 
