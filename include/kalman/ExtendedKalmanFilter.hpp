@@ -134,7 +134,7 @@ namespace Kalman {
      * @return The updated state estimate
      */
     template<class Measurement, template<class> class CovarianceBase>
-    const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05)
+    const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05, const bool mahalanobis = false, const double reject_sigma = 1)
     {
 
       // std::cout << "KALMAN UPDATING" << std::endl;
@@ -144,6 +144,15 @@ namespace Kalman {
       // COMPUTE KALMAN GAIN
       // compute innovation covariance
       Covariance<Measurement> S = ( m.H * P * m.H.transpose() ) + ( m.V * m.getCovariance() * m.V.transpose());
+
+      if (mahalanobis) {
+	double distance_squared = (z - m.h( x )).transpose() * S.inverse() * (z - m.h( x ));
+
+	if (fabs(distance_squared) > reject_sigma * reject_sigma) {
+	  return this->getState();
+	}
+      }
+
 
       // std::cout << "S = " << std::endl;
       // std::cout << std::endl;
