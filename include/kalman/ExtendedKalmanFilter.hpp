@@ -116,11 +116,14 @@ namespace Kalman {
       P  = ( s.F * P * s.F.transpose() ) + ( s.W * s.getCovariance() * s.W.transpose() );
 
 
-      // std::cout << "P" << std::endl;
-      // std::cout << std::endl;
-      // std::cout << P << std::endl;
-      // std::cout << std::endl;
+      #ifdef PRINT_DEBUG
 
+      std::cout << "P" << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
+
+      #endif
 
       // return state prediction
       return this->getState();
@@ -149,60 +152,82 @@ namespace Kalman {
 	double distance_squared = (z - m.h( x )).transpose() * S.inverse() * (z - m.h( x ));
 
 	if (fabs(distance_squared) > reject_sigma * reject_sigma) {
+
+	  #ifdef PRINT_DEBUG
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+
+	  std::cout
+	    << "[WARNING]: IGNORED DUE TO MAHALANOBIS DISTANCE OUTLIER DETECTION"
+	    << std::endl;
+	  
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+	  std::cout << std::endl;
+	  #endif
+
 	  return this->getState();
 	}
       }
 
+      #ifdef PRINT_DEBUG
+      
+      std::cout << "S = " << std::endl;
+      std::cout << std::endl;
+      std::cout << S << std::endl;
+      std::cout << std::endl;
 
-      // std::cout << "S = " << std::endl;
-      // std::cout << std::endl;
-      // std::cout << S << std::endl;
-      // std::cout << std::endl;
+      std::cout << "P = " << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
 
-      // std::cout << "P = " << std::endl;
-      // std::cout << std::endl;
-      // std::cout << P << std::endl;
-      // std::cout << std::endl;
+      std::cout << "S inverse " << std::endl;
+      std::cout << std::endl;
+      std::cout << S.inverse() << std::endl;
+      std::cout << std::endl;
 
-      // std::cout << "S inverse " << std::endl;
-      // std::cout << std::endl;
-      // std::cout << S.inverse() << std::endl;
-      // std::cout << std::endl;
-
+      #endif
  
       // compute kalman gain
       KalmanGain<Measurement> K = P * m.H.transpose() * S.inverse();
 
-      // std::cout << "K" << std::endl;
-      // std::cout << std::endl;
-      // std::cout << K << std::endl;
-      // std::cout << std::endl;
-
+      #ifdef PRINT_DEBUG
+      std::cout << "K" << std::endl;
+      std::cout << std::endl;
+      std::cout << K << std::endl;
+      std::cout << std::endl;
+      #endif
 
             
       // UPDATE STATE ESTIMATE AND COVARIANCE
       // Update state using computed kalman gain and innovation
       x += K * ( z - m.h( x ) );
 
-      // std::cout << "X" << std::endl;
-      // std::cout << std::endl;
-      // std::cout << x << std::endl;
-      // std::cout << std::endl;
-
+      #ifdef PRINT_DEBUG
+      std::cout << "X" << std::endl;
+      std::cout << std::endl;
+      std::cout << x << std::endl;
+      std::cout << std::endl;
+      #endif
 
             
       // Update covariance
       P -= K * m.H * P;
 
 
-      // std::cout << "P" << std::endl;
-      // std::cout << std::endl;
-      // std::cout << P << std::endl;
-      // std::cout << std::endl;
+      #ifdef PRINT_DEBUG
+      std::cout << "P" << std::endl;
+      std::cout << std::endl;
+      std::cout << P << std::endl;
+      std::cout << std::endl;
+      #endif
 
 
-      // std::cout << std::endl << std::endl << P << std::endl << std::endl;
-            
+           
       // return updated state estimate
       return this->getState();
     }
