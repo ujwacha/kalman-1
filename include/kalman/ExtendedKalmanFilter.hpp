@@ -137,10 +137,10 @@ namespace Kalman {
     const State& update( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05, const bool mahalanobis = false, const double reject_sigma = 1)
     {
 
-      std::cout << "KALMAN UPDATING" << std::endl;
-      std::cout << "time: " << t << std::endl;
-      std::cout << "mahalanobis: " << mahalanobis << std::endl;
-      std::cout << "reject_sigma: " << reject_sigma << std::endl;
+      // std::cout << "KALMAN UPDATING" << std::endl;
+      // std::cout << "time: " << t << std::endl;
+      // std::cout << "mahalanobis: " << mahalanobis << std::endl;
+      // std::cout << "reject_sigma: " << reject_sigma << std::endl;
 
       m.updateJacobians( x, t );
             
@@ -152,7 +152,7 @@ namespace Kalman {
 	std::cout << "MAHALANOBIS ENABLED" << std::endl;
 	double distance_squared = ((z - m.h( x )).transpose() * S.inverse() * (z - m.h( x ))).value();
 
-	std::cout << "distance_squared: " << distance_squared << std::endl;
+	// std::cout << "distance_squared: " << distance_squared << std::endl;
 	
 	if (fabs(distance_squared) > reject_sigma * reject_sigma) {
 	  std::cout << "MAHALANOBIS REJECTED OUTLIER" << std::endl;
@@ -161,29 +161,29 @@ namespace Kalman {
       }
 
 
-      std::cout << "S = " << std::endl;
-      std::cout << std::endl;
-      std::cout << S << std::endl;
-      std::cout << std::endl;
+      // std::cout << "S = " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << S << std::endl;
+      // std::cout << std::endl;
 
-      std::cout << "P = " << std::endl;
-      std::cout << std::endl;
-      std::cout << P << std::endl;
-      std::cout << std::endl;
+      // std::cout << "P = " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << P << std::endl;
+      // std::cout << std::endl;
 
-      std::cout << "S inverse " << std::endl;
-      std::cout << std::endl;
-      std::cout << S.inverse() << std::endl;
-      std::cout << std::endl;
+      // std::cout << "S inverse " << std::endl;
+      // std::cout << std::endl;
+      // std::cout << S.inverse() << std::endl;
+      // std::cout << std::endl;
 
  
       // compute kalman gain
       KalmanGain<Measurement> K = P * m.H.transpose() * S.inverse();
 
-      std::cout << "K" << std::endl;
-      std::cout << std::endl;
-      std::cout << K << std::endl;
-      std::cout << std::endl;
+      // std::cout << "K" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << K << std::endl;
+      // std::cout << std::endl;
 
 
             
@@ -191,10 +191,10 @@ namespace Kalman {
       // Update state using computed kalman gain and innovation
       x += K * ( z - m.h( x ) );
 
-      std::cout << "X" << std::endl;
-      std::cout << std::endl;
-      std::cout << x << std::endl;
-      std::cout << std::endl;
+      // std::cout << "X" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << x << std::endl;
+      // std::cout << std::endl;
 
 
             
@@ -202,13 +202,13 @@ namespace Kalman {
       P -= K * m.H * P;
 
 
-      std::cout << "P" << std::endl;
-      std::cout << std::endl;
-      std::cout << P << std::endl;
-      std::cout << std::endl;
+      // std::cout << "P" << std::endl;
+      // std::cout << std::endl;
+      // std::cout << P << std::endl;
+      // std::cout << std::endl;
 
 
-      std::cout << std::endl << std::endl << P << std::endl << std::endl;
+      // std::cout << std::endl << std::endl << P << std::endl << std::endl;
             
       // return updated state estimate
       return this->getState();
