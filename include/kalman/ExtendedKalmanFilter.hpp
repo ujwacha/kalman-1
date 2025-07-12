@@ -225,6 +225,13 @@ namespace Kalman {
     double get_mahalanobis( MeasurementModelType<Measurement, CovarianceBase>& m, const Measurement& z, const double t = 0.05)
     {
 
+
+      std::cout << "EXPECTED: " << std::endl;
+      std::cout << m.h(x) << std::endl;
+
+      std::cout << "RECIEVED: " << std::endl;
+      std::cout << z << std::endl;
+
       m.updateJacobians( x, t );
             
       // COMPUTE KALMAN GAIN
